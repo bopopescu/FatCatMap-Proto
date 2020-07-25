@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-"""Contains the data classes of the Google Webmaster Tools Data API"""
+"""Contains the data classes of the Google Webmain Tools Data API"""
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'

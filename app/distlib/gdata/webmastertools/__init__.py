@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Contains extensions to Atom objects used with Google Webmaster Tools."""
+"""Contains extensions to Atom objects used with Google Webmain Tools."""
 
 
 __author__ = 'livibetter (Yu-Jie Lin)'
@@ -34,7 +34,7 @@ import atom
 import gdata
 
 
-# XML namespaces which are often used in Google Webmaster Tools entities.
+# XML namespaces which are often used in Google Webmain Tools entities.
 GWEBMASTERTOOLS_NAMESPACE = 'http://schemas.google.com/webmasters/tools/2007'
 GWEBMASTERTOOLS_TEMPLATE = '{http://schemas.google.com/webmasters/tools/2007}%s'
 
@@ -310,7 +310,7 @@ class LinkFinder(atom.LinkFinder):
 
 
 class SitesEntry(atom.Entry, LinkFinder):
-  """A Google Webmaster Tools meta Entry flavor of an Atom Entry """
+  """A Google Webmain Tools meta Entry flavor of an Atom Entry """
 
   _tag = atom.Entry._tag
   _namespace = atom.Entry._namespace
@@ -373,7 +373,7 @@ def SitesEntryFromString(xml_string):
 
 
 class SitesFeed(atom.Feed, LinkFinder):
-  """A Google Webmaster Tools meta Sites feed flavor of an Atom Feed"""
+  """A Google Webmain Tools meta Sites feed flavor of an Atom Feed"""
 
   _tag = atom.Feed._tag
   _namespace = atom.Feed._namespace
@@ -439,7 +439,7 @@ def SitesFeedFromString(xml_string):
 
 
 class SitemapsEntry(atom.Entry, LinkFinder):
-  """A Google Webmaster Tools meta Sitemaps Entry flavor of an Atom Entry """
+  """A Google Webmain Tools meta Sitemaps Entry flavor of an Atom Entry """
 
   _tag = atom.Entry._tag
   _namespace = atom.Entry._namespace
@@ -493,7 +493,7 @@ def SitemapsEntryFromString(xml_string):
 
 
 class SitemapsFeed(atom.Feed, LinkFinder):
-  """A Google Webmaster Tools meta Sitemaps feed flavor of an Atom Feed"""
+  """A Google Webmain Tools meta Sitemaps feed flavor of an Atom Feed"""
 
   _tag = atom.Feed._tag
   _namespace = atom.Feed._namespace

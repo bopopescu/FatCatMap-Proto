@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""GWebmasterToolsService extends the GDataService to streamline
-Google Webmaster Tools operations.
+"""GWebmainToolsService extends the GDataService to streamline
+Google Webmain Tools operations.
 
-  GWebmasterToolsService: Provides methods to query feeds and manipulate items.
+  GWebmainToolsService: Provides methods to query feeds and manipulate items.
                           Extends GDataService.
 """
 
@@ -27,7 +27,7 @@ import urllib
 import gdata
 import atom.service
 import gdata.service
-import gdata.webmastertools as webmastertools
+import gdata.webmaintools as webmaintools
 import atom
 
 
@@ -46,12 +46,12 @@ class RequestError(Error):
   pass
 
 
-class GWebmasterToolsService(gdata.service.GDataService):
-  """Client for the Google Webmaster Tools service."""
+class GWebmainToolsService(gdata.service.GDataService):
+  """Client for the Google Webmain Tools service."""
 
   def __init__(self, email=None, password=None, source=None,
                server='www.google.com', **kwargs):
-    """Creates a client for the Google Webmaster Tools service.
+    """Creates a client for the Google Webmain Tools service.
 
     Args:
       email: string (optional) The user's email address, used for
@@ -68,7 +68,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
         server=server, **kwargs)
 
   def GetSitesFeed(self, uri=SITES_FEED,
-      converter=webmastertools.SitesFeedFromString):
+      converter=webmaintools.SitesFeedFromString):
     """Gets sites feed.
 
     Args:
@@ -86,7 +86,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
 
   def AddSite(self, site_uri, uri=SITES_FEED,
       url_params=None, escape_params=True, converter=None):
-    """Adds a site to Google Webmaster Tools.
+    """Adds a site to Google Webmain Tools.
 
     Args: 
       site_uri: str URI of which site to add.
@@ -105,18 +105,18 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitesEntry object.
     """
 
-    site_entry = webmastertools.SitesEntry()
+    site_entry = webmaintools.SitesEntry()
     site_entry.content = atom.Content(src=site_uri)
     response = self.Post(site_entry, uri,
         url_params=url_params, 
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitesEntryFromString(response.ToString())
+      return webmaintools.SitesEntryFromString(response.ToString())
     return response
 
   def DeleteSite(self, site_uri, uri=SITE_TEMPLATE,
       url_params=None, escape_params=True):
-    """Removes a site from Google Webmaster Tools.
+    """Removes a site from Google Webmain Tools.
 
     Args: 
       site_uri: str URI of which site to remove.
@@ -159,12 +159,12 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitesEntry object.
     """
 
-    site_entry = webmastertools.SitesEntry(
+    site_entry = webmaintools.SitesEntry(
         atom_id=atom.Id(text=site_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
-        verification_method=webmastertools.VerificationMethod(
+        verification_method=webmaintools.VerificationMethod(
             type=verification_method, in_use='true')
         )
     response = self.Put(
@@ -173,7 +173,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitesEntryFromString(response.ToString())
+      return webmaintools.SitesEntryFromString(response.ToString())
     return response
 
 
@@ -201,12 +201,12 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitesEntry object.
     """
 
-    site_entry = webmastertools.SitesEntry(
+    site_entry = webmaintools.SitesEntry(
         atom_id=atom.Id(text=site_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
-        geolocation=webmastertools.GeoLocation(text=geolocation)
+        geolocation=webmaintools.GeoLocation(text=geolocation)
         )
     response = self.Put(
         site_entry,
@@ -214,7 +214,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitesEntryFromString(response.ToString())
+      return webmaintools.SitesEntryFromString(response.ToString())
     return response
 
   def UpdateCrawlRate(self, site_uri, crawl_rate, uri=SITE_TEMPLATE,
@@ -241,12 +241,12 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitesEntry object.
     """
 
-    site_entry = webmastertools.SitesEntry(
+    site_entry = webmaintools.SitesEntry(
         atom_id=atom.Id(text=site_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
-        crawl_rate=webmastertools.CrawlRate(text=crawl_rate)
+        crawl_rate=webmaintools.CrawlRate(text=crawl_rate)
         )
     response = self.Put(
         site_entry,
@@ -254,7 +254,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitesEntryFromString(response.ToString())
+      return webmaintools.SitesEntryFromString(response.ToString())
     return response
 
   def UpdatePreferredDomain(self, site_uri, preferred_domain, uri=SITE_TEMPLATE,
@@ -284,12 +284,12 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitesEntry object.
     """
 
-    site_entry = webmastertools.SitesEntry(
+    site_entry = webmaintools.SitesEntry(
         atom_id=atom.Id(text=site_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
-        preferred_domain=webmastertools.PreferredDomain(text=preferred_domain)
+        preferred_domain=webmaintools.PreferredDomain(text=preferred_domain)
         )
     response = self.Put(
         site_entry,
@@ -297,7 +297,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitesEntryFromString(response.ToString())
+      return webmaintools.SitesEntryFromString(response.ToString())
     return response
 
   def UpdateEnhancedImageSearch(self, site_uri, enhanced_image_search,
@@ -324,12 +324,12 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitesEntry object.
     """
 
-    site_entry = webmastertools.SitesEntry(
+    site_entry = webmaintools.SitesEntry(
         atom_id=atom.Id(text=site_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sites-info'),
-        enhanced_image_search=webmastertools.EnhancedImageSearch(
+        enhanced_image_search=webmaintools.EnhancedImageSearch(
             text=enhanced_image_search)
         )
     response = self.Put(
@@ -338,11 +338,11 @@ class GWebmasterToolsService(gdata.service.GDataService):
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitesEntryFromString(response.ToString())
+      return webmaintools.SitesEntryFromString(response.ToString())
     return response
 
   def GetSitemapsFeed(self, site_uri, uri=SITEMAPS_FEED_TEMPLATE,
-      converter=webmastertools.SitemapsFeedFromString):
+      converter=webmaintools.SitemapsFeedFromString):
     """Gets sitemaps feed of a site.
     
     Args:
@@ -385,19 +385,19 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitemapsEntry object.
     """
 
-    sitemap_entry = webmastertools.SitemapsEntry(
+    sitemap_entry = webmaintools.SitemapsEntry(
         atom_id=atom.Id(text=sitemap_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sitemap-regular'),
-        sitemap_type=webmastertools.SitemapType(text=sitemap_type))
+        sitemap_type=webmaintools.SitemapType(text=sitemap_type))
     response = self.Post(
         sitemap_entry,
         uri % {'site_id': urllib.quote_plus(site_uri)},
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitemapsEntryFromString(response.ToString())
+      return webmaintools.SitemapsEntryFromString(response.ToString())
     return response
 
   def AddMobileSitemap(self, site_uri, sitemap_uri,
@@ -426,13 +426,13 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitemapsEntry object.
     """
     # FIXME
-    sitemap_entry = webmastertools.SitemapsEntry(
+    sitemap_entry = webmaintools.SitemapsEntry(
         atom_id=atom.Id(text=sitemap_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
             term='http://schemas.google.com/webmasters/tools/2007#sitemap-mobile'),
         sitemap_mobile_markup_language=\
-            webmastertools.SitemapMobileMarkupLanguage(
+            webmaintools.SitemapMobileMarkupLanguage(
                 text=sitemap_mobile_markup_language))
     print sitemap_entry
     response = self.Post(
@@ -441,7 +441,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitemapsEntryFromString(response.ToString())
+      return webmaintools.SitemapsEntryFromString(response.ToString())
     return response
 
   def AddNewsSitemap(self, site_uri, sitemap_uri,
@@ -470,7 +470,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
       response. Otherwise, it will be a SitemapsEntry object.
     """
 
-    sitemap_entry = webmastertools.SitemapsEntry(
+    sitemap_entry = webmaintools.SitemapsEntry(
         atom_id=atom.Id(text=sitemap_uri),
         category=atom.Category(
             scheme='http://schemas.google.com/g/2005#kind',
@@ -481,7 +481,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
       sitemap_news_publication_label = [sitemap_news_publication_label]
     for label in sitemap_news_publication_label:
       sitemap_entry.sitemap_news_publication_label.append(
-          webmastertools.SitemapNewsPublicationLabel(text=label))
+          webmaintools.SitemapNewsPublicationLabel(text=label))
     print sitemap_entry
     response = self.Post(
         sitemap_entry,
@@ -489,7 +489,7 @@ class GWebmasterToolsService(gdata.service.GDataService):
         url_params=url_params,
         escape_params=escape_params, converter=converter)
     if not converter and isinstance(response, atom.Entry):
-      return webmastertools.SitemapsEntryFromString(response.ToString())
+      return webmaintools.SitemapsEntryFromString(response.ToString())
     return response
 
   def DeleteSitemap(self, site_uri, sitemap_uri, uri=SITEMAP_TEMPLATE,
